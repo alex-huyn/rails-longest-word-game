@@ -26,6 +26,7 @@ class GamesController < ApplicationController
     @attempt = params[:answer].upcase
     @letters = params[:letters].split(' ')
     @result = ''
+    @score = 0
     word_string = open("https://wagon-dictionary.herokuapp.com/#{@attempt}").read
     word_hash = JSON.parse(word_string)
     if word_hash['found'] == false
@@ -34,6 +35,12 @@ class GamesController < ApplicationController
       @result = "Sorry but #{@attempt} is not in the grid"
     else
       @result = 'Well done'
+      @score = @attempt.length
+    end
+    if session[:grand_score]
+      session[:grand_score] += @score
+    else
+      session[:grand_score] = @score
     end
   end
 end

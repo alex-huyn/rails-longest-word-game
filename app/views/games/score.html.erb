@@ -1,5 +1,8 @@
 
 <h1>Result</h1>
 <%= @result %>
+<p>Your score is: <%= @score %> points</p>
+
+<p>Your total score is: <%= session[:grand_score] %> points</p>
 
 <%= link_to 'Play again', new_path %>
